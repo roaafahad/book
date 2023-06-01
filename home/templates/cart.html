@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .product-card {
+            transition: transform 0.3s;
+        }
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+        .navbar {
+            transition: top 0.3s;
+        }
+        .navbar.scrolled {
+            top: 0;
+        }
+        .navbar-icons {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+        }
+        .navbar-icons .btn {
+            margin-right: 10px;
+        }
+        .fa-star {
+            font-size: 10px;
+            margin-right: -1px;
+        }
+        .golden-star-1,.golden-star-2,.golden-star-3,.golden-star-4,.golden-star-5 {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+        </ul>
+        <div class="navbar-icons">
+            <a href="/logout" class="btn btn-primary">
+                <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
+            </a>
+            {% if super %}
+            <a href="/admin" class="btn btn-primary">
+                <i class="fa fa-user-secret" aria-hidden="true"></i> Dashboard
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h1 class="text-center pt-4">Cart Items</h1>
+    {% if type == "success" %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Success!</strong> Thank you for purchasing from our service!.
+    </div>
+    {% elif type == "failed" %}
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Failed!</strong> Payment has been cancelled!
+    </div>
+    {% endif %}
+        <div class="d-flex flex-wrap justify-content-center">
+        {% for book in books %}
+            <div class="card product-card m-3" onclick="location.href = '/product/{{ book.pk }}';">
+                <img src="media/{{ book.image }}" class="card-img-top" alt="{{ book.name }}" height="300" width="100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.name|slice:"0:20" }}</h5>
+                    <p class="card-text">Author: {{ book.writer }}</p>
+                    <p class="card-text">Price: ${{ book.price }}</p>
+                    <div class="d-flex">
+                        <a href="/delete/{{ book.pk }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> Remove</a>
+                        <span style="padding: 0 10px;"></span>
+                        <div class="rating-container">
+                            <i class="fa fa-star golden-star-{{ book.rate|add:'-0' }}"></i>
+                            <i class="fa fa-star golden-star-{{ book.rate|add:'-1' }}"></i>
+                            <i class="fa fa-star golden-star-{{ book.rate|add:'-2' }}"></i>
+                            <i class="fa fa-star golden-star-{{ book.rate|add:'-3' }}"></i>
+                            <i class="fa fa-star golden-star-{{ book.rate|add:'-4' }}"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% if number == 0 %}
+            <div class="text-center mt-5" style="height:70vh;width:100%;">
+                <h4 class="lead mt-5">Cart is empty</h4>
+                <p>You haven't added any items to the cart</p>
+                <a href="/#products" class="btn btn-primary mt-5">Explore the latest books</a>
+            </div>
+        {% endif %}
+        </div>
+    {% if number != 0 %}
+    <div class="text-center mt-5">
+        <a href="/checkout" class="btn btn-success" id="submitBt">Purchase for ${{ total }}</a>
+    </div>
+    {% endif %}
+    </div>
+</div>
+<footer class="bg-dark text-white text-center py-4">
+    <p>&copy; 2023 CS314. All rights reserved.</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var previousScroll = 0;
+
+        $(window).scroll(function () {
+            var currentScroll = $(this).scrollTop();
+
+            if (currentScroll > previousScroll) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+
+            previousScroll = currentScroll;
+        });
+    });
+</script>
+</body>
+</html>
+

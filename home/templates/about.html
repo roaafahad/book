@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        :root {
+            scroll-behavior: smooth;
+        }
+        .dev-card {
+            border: 0px;
+        }
+        .navbar {
+            transition: top 0.3s;
+        }
+        .navbar.scrolled {
+            top: 0;
+        }
+        .navbar-icons {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+        }
+        .navbar-icons .btn {
+            margin-right: 10px;
+        }
+        .fa-star {
+            font-size: 10px;
+            margin-right: -1px;
+        }
+        .golden-star-1,.golden-star-2,.golden-star-3,.golden-star-4,.golden-star-5 {
+            color: gold;
+        }
+        #main-home {
+            {% load static %}
+            background-image: url("{% static 'home/about.jpg' %}");
+            background-repeat:no-repeat;
+            background-position:center;
+            background-size:cover;
+            height: 90vh;
+        }
+
+    </style>
+</head>
+<body>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="/">Logo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/about">About <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+            </li>
+        </ul>
+        <div class="navbar-icons">
+            {% if logged %}
+            <a href="/cart" class="btn btn-primary">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
+            </a>
+            <a href="/logout" class="btn btn-primary">
+                <i class="fa fa-sign-out-alt" aria-hidden="true"></i> Logout
+            </a>
+            {% else %}
+            <a href="/login" class="btn btn-primary">
+                <i class="fa fa-user" aria-hidden="true"></i> Login
+            </a>
+            <a href="/signup" class="btn btn-primary">
+                <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up
+            </a>
+            {% endif %}
+            {% if super %}
+            <a href="/admin" class="btn btn-primary">
+                <i class="fa fa-user-secret" aria-hidden="true"></i> Dashboard
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" id="main-home">
+    <div class="text-center">
+        <h1 class="text-warning text-bold" style="padding-top: 300px;">it's the love of reading which brought us here</h1>
+    </div>
+</div>
+<div class="container mt-5">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="display-4">Welcome to our Online Bookstore!</h1>
+            <p class="lead">At this bookstore, we are passionate about connecting readers with the literary wonders of the world. Our online bookstore is a virtual haven for book lovers, offering a vast collection of titles that span across genres, authors, and cultures.</p>
+            <p>We believe that books have the power to ignite imagination, inspire change, and transform lives. That's why we carefully curate our selection to cater to diverse interests, ensuring there is something for every reader. Whether you're searching for gripping thrillers, thought-provoking non-fiction, heartwarming romance, or captivating children's books, our shelves are stocked with literary treasures waiting to be discovered.</p>
+            <p>Shopping at this Bookstore is an immersive and convenient experience. With just a few clicks, you can explore our extensive catalog, read book descriptions, browse customer reviews, and find your next literary adventure. Our user-friendly website is designed to make your online book-buying journey seamless and enjoyable.</p>
+        </div>
+    </section>
+
+  <section class="py-5">
+        <h2 class="text-center">Meet the Developers</h2>
+        <div class="container mt-5">
+            <div class="d-flex flex-wrap justify-content-center" id="products">
+                {% load static %}
+                <div class="card dev-card m-3">
+                    <img src="{% static 'home/developer_avatar1.png' %}"class="card-img-top" alt="developer_avatar" height="400" width="300">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">ROAA FAHAD ALSRHID</h5>
+                        <p class="card-text text-center">4211592</p>
+                    </div>
+                </div>
+                <div class="card dev-card m-3">
+                  <img src="{% static 'home/developer_avatar2.png' %}"class="card-img-top" alt="developer_avatar" height="400" width="300">
+                  <div class="card-body">
+                      <h5 class="card-title text-center">SALY SAUD ALANAZI</h5>
+                      <p class="card-text text-center">4020107</p>
+                  </div>
+                </div>
+                <div class="card dev-card m-3">
+                  <img src="{% static 'home/developer_avatar3.png' %}"class="card-img-top" alt="developer_avatar" height="400" width="300">
+                  <div class="card-body">
+                      <h5 class="card-title text-center">ATYAF AHMED ALHAWITI</h5>
+                      <p class="card-text text-center">4211640</p>
+                  </div>
+                </div>
+                <div class="card dev-card m-3">
+                  <img src="{% static 'home/developer_avatar4.png' %}"class="card-img-top" alt="developer_avatar" height="400" width="300">
+                  <div class="card-body">
+                      <h5 class="card-title text-center">ALANUAD SULAIMAN ALBALAWI</h5>
+                      <p class="card-text text-center">4211614</p>
+                  </div>
+                </div>
+            </div>
+        </div>
+  </section>
+</div>
+<footer class="bg-dark text-white text-center py-4">
+    <p>&copy; 2023 bookstore. All rights reserved.</p>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var previousScroll = 0;
+
+        $(window).scroll(function () {
+            var currentScroll = $(this).scrollTop();
+
+            if (currentScroll > previousScroll) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+
+            previousScroll = currentScroll;
+        });
+    });
+</script>
+</body>
+</html>
+
